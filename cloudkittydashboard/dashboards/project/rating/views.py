@@ -109,8 +109,6 @@ class IndexView(views.APIView):
             # Add data to the context here...
             total = api.cloudkittyclient(request).reports.get_total(
                     tenant_id=request.user.tenant_id, begin=self.local2utc(start_time_today), end= self.local2utc(now)) or 0.00
-            total = float(total)
-            total = ("{0:.2f}".format(total))
     
             total_dict = {}
             total_dict = OrderedDict(total_dict)
@@ -119,14 +117,10 @@ class IndexView(views.APIView):
                     totals = api.cloudkittyclient(request).reports.get_total(
                             tenant_id=request.user.tenant_id, service=service_items, begin=self.local2utc(start_time_today), end= self.local2utc(now)) or 0.00
                     service_items = services_mapping[service_items]
-                    totals = float(totals)
-                    totals = ("{0:.2f}".format(totals))
                     total_dict[service_items] = totals
     
             total_week = api.cloudkittyclient(request).reports.get_total(
                     tenant_id=request.user.tenant_id, begin=self.local2utc(start_date_week), end= self.local2utc(now)) or 0.00
-            total_week = float(total_week)
-            total_week = ("{0:.2f}".format(total_week))
     
             total_week_dict = {}
             total_week_dict = OrderedDict(total_week_dict)
@@ -134,14 +128,10 @@ class IndexView(views.APIView):
                     totals_week = api.cloudkittyclient(request).reports.get_total(
                             tenant_id=request.user.tenant_id, service=service_items, begin=self.local2utc(start_date_week), end= self.local2utc(now)) or 0.00
                     service_items = services_mapping[service_items]
-                    totals_week = float(totals_week)
-                    totals_week = ("{0:.2f}".format(totals_week))
                     total_week_dict[service_items] = totals_week
     
             total_month = api.cloudkittyclient(request).reports.get_total(
                     tenant_id=request.user.tenant_id, begin=self.local2utc(start_date_month), end= self.local2utc(now)) or 0.00
-            total_month = float(total_month)
-            total_month = ("{0:.2f}".format(total_month))
     
             total_month_dict = {}
             total_month_dict = OrderedDict(total_month_dict)
@@ -149,15 +139,22 @@ class IndexView(views.APIView):
                     totals_month = api.cloudkittyclient(request).reports.get_total(
                             tenant_id=request.user.tenant_id, service=service_items, begin=self.local2utc(start_date_month), end= self.local2utc(now)) or 0.00
                     service_items = services_mapping[service_items]
-                    totals_month = float(totals_month)
-                    totals_month = ("{0:.2f}".format(totals_month))
                     total_month_dict[service_items] = totals_month
-    
+
+
+	    # cloud resource section
             total_cloud = api.cloudkittyclient(request).reports.get_total(
-                    tenant_id=request.user.tenant_id, service='cloudstorage', begin=self.local2utc(start_period_cloud), end= self.local2utc(now)) or 0.00
-            total_cloud = float(total_cloud)
-            total_cloud = ("{0:.2f}".format(total_cloud))
-            
+                    tenant_id=request.user.tenant_id, begin=self.local2utc(start_period_cloud), end= self.local2utc(now)) or 0.00
+
+	    # cloud resources section    
+            total_cloud_dict = {}
+            total_cloud_dict = OrderedDict(total_cloud_dict)
+            for service_items in services:
+                    totals_cloud = api.cloudkittyclient(request).reports.get_total(
+                            tenant_id=request.user.tenant_id, service=service_items, begin=self.local2utc(start_period_cloud), end= self.local2utc(now)) or 0.00
+                    service_items = services_mapping[service_items]
+                    total_cloud_dict[service_items] = totals_cloud
+ 
         except:
    
             # services dict
@@ -178,24 +175,17 @@ class IndexView(views.APIView):
             # Add data to the context here...
             total = api.cloudkittyclient(request).reports.get_total(
                     tenant_id=request.user.tenant_id, begin=start_time_today, end= now) or 0.00
-            total = float(total)
-            total = ("{0:.2f}".format(total))
     
             total_dict = {}
             total_dict = OrderedDict(total_dict)
             for service_items in services:
-                    print service_items
                     totals = api.cloudkittyclient(request).reports.get_total(
                             tenant_id=request.user.tenant_id, service=service_items, begin=start_time_today, end= now) or 0.00
                     service_items = services_mapping[service_items]
-                    totals = float(totals)
-                    totals = ("{0:.2f}".format(totals))
                     total_dict[service_items] = totals
     
             total_week = api.cloudkittyclient(request).reports.get_total(
                     tenant_id=request.user.tenant_id, begin=start_date_week, end= now) or 0.00
-            total_week = float(total_week)
-            total_week = ("{0:.2f}".format(total_week))
     
             total_week_dict = {}
             total_week_dict = OrderedDict(total_week_dict)
@@ -203,14 +193,10 @@ class IndexView(views.APIView):
                     totals_week = api.cloudkittyclient(request).reports.get_total(
                             tenant_id=request.user.tenant_id, service=service_items, begin=start_date_week, end= now) or 0.00
                     service_items = services_mapping[service_items]
-                    totals_week = float(totals_week)
-                    totals_week = ("{0:.2f}".format(totals_week))
                     total_week_dict[service_items] = totals_week
     
             total_month = api.cloudkittyclient(request).reports.get_total(
                     tenant_id=request.user.tenant_id, begin=start_date_month, end=now) or 0.00
-            total_month = float(total_month)
-            total_month = ("{0:.2f}".format(total_month))
     
             total_month_dict = {}
             total_month_dict = OrderedDict(total_month_dict)
@@ -218,15 +204,21 @@ class IndexView(views.APIView):
                     totals_month = api.cloudkittyclient(request).reports.get_total(
                             tenant_id=request.user.tenant_id, service=service_items, begin=start_date_month, end= now) or 0.00
                     service_items = services_mapping[service_items]
-                    totals_month = float(totals_month)
-                    totals_month = ("{0:.2f}".format(totals_month))
                     total_month_dict[service_items] = totals_month
     
+            # cloud resource section
             total_cloud = api.cloudkittyclient(request).reports.get_total(
-                    tenant_id=request.user.tenant_id, service='cloudstorage', begin=start_period_cloud, end= now) or 0.00
-            total_cloud = float(total_cloud)
-            total_cloud = ("{0:.2f}".format(total_cloud))
-        
+                    tenant_id=request.user.tenant_id, begin=start_period_cloud, end=now) or 0.00
+
+            # cloud resources section    
+            total_cloud_dict = {}
+            total_cloud_dict = OrderedDict(total_cloud_dict)
+            for service_items in services:
+                    totals_cloud = api.cloudkittyclient(request).reports.get_total(
+                            tenant_id=request.user.tenant_id, service=service_items, begin=start_period_cloud, end=now) or 0.00
+                    service_items = services_mapping[service_items]
+                    total_cloud_dict[service_items] = totals_cloud
+       
         context['total_today'] = total
         context['start_period_today'] = start_time_today.strftime('%b %d %Y %H:%M')
         context['end_period'] = now.strftime('%b %d %Y %H:%M')
@@ -245,6 +237,7 @@ class IndexView(views.APIView):
         context['total_cloud'] = total_cloud
         context['start_period_cloud'] = start_period_cloud.strftime('%b %d %Y %H:%M')
         context['end_period'] = now.strftime('%b %d %Y %H:%M')
+	context['total_cloud_dict'] = total_cloud_dict
 
         return context
 
