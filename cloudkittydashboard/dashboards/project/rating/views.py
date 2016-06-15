@@ -13,6 +13,7 @@
 #    under the License.
 
 from decimal import *
+import decimal
 import json
 
 from django import http
