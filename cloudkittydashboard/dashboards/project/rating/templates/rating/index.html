@@ -8,7 +8,7 @@
 
 {% block main %}
 <hr class="header_rule"></hr>
-<h2>Total Cost for today - ${{ total_today }}</h2>
+<h2>Total Cost for today - ${{ total_today|floatformat:2 }}</h2>
 <h3>({{ start_period_today }} to {{ end_period }})</h3>
 <table class="table table-bordered table-striped" id="rating">
     <thead>
@@ -21,13 +21,13 @@
 	    {% for name, rate in total_dict.items %}
             <tr class="{% cycle 'odd' 'even' %}">
                 <td class="normal_column">{{ name }}</td>
-                <td class="cost_column">${{ rate }}</td>
+                <td class="cost_column">${{ rate|floatformat:2 }}</td>
             </tr>
 	    {% endfor %}
     </tbody>
 </table>
 
-<h2>Total Cost for trailing Week - ${{total_week}}</h2> 
+<h2>Total Cost for trailing 7 Days - ${{total_week|floatformat:2}}</h2> 
 <h3>({{ start_period_week }} to {{ end_period }})</h3>
 <table class="table table-bordered table-striped" id="rating">
     <thead>
@@ -40,13 +40,13 @@
             {% for name, rate in total_week_dict.items %}
             <tr class="{% cycle 'odd' 'even' %}">
                 <td class="normal_column">{{ name }}</td>
-                <td class="cost_column">${{ rate }}</td>
+                <td class="cost_column">${{ rate|floatformat:2 }}</td>
             </tr>
             {% endfor %}
     </tbody>
 </table>
 
-<h2>Total Cost for trailing month - ${{total_month}}</h2> 
+<h2>Total Cost for trailing month - ${{total_month|floatformat:2}}</h2> 
 <h3>({{ start_period_month }} to {{ end_period }})</h3>
 <table class="table table-bordered table-striped" id="rating">
     <thead>
@@ -59,12 +59,28 @@
             {% for name, rate in total_month_dict.items %}
             <tr class="{% cycle 'odd' 'even' %}">
                 <td class="normal_column">{{ name }}</td>
-                <td class="cost_column">${{ rate }}</td>
+                <td class="cost_column">${{ rate|floatformat:2 }}</td>
             </tr>
             {% endfor %}
     </tbody>    
 </table> 
 
-<h2>Total Cost for Cloud resources from tenant creation date - ${{total_cloud}}</h2>
+<h2>Total Cost for Cloud resources from tenant creation date - ${{total_cloud|floatformat:2}}</h2>
 <h3>({{ start_period_cloud }} to {{ end_period }})</h3>
+<table class="table table-bordered table-striped" id="rating">
+    <thead>
+        <tr class="tablesorter-headerRow">
+            <th class="normal_column">Service type</th>
+            <th class="normal_column">Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for name, rate in total_cloud_dict.items %}
+            <tr class="{% cycle 'odd' 'even' %}">
+                <td class="normal_column">{{ name }}</td>
+                <td class="cost_column">${{ rate|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
