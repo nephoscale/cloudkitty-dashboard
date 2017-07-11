@@ -1,3 +1,12 @@
+========================
+Team and repository tags
+========================
+
+.. image:: http://governance.openstack.org/badges/cloudkitty-dashboard.svg
+    :target: http://governance.openstack.org/reference/tags/index.html
+
+.. Change things from this point on
+
 ====================
 CloudKitty dashboard
 ====================
@@ -28,7 +37,7 @@ Contributing
 We are welcoming new contributors, if you've got new ideas, suggestions or want
 to contribute, contact us.
 
-You can reach us throught IRC (#cloudkitty @freenode.net), or on the official
+You can reach us through IRC (#cloudkitty @freenode.net), or on the official
 OpenStack mailing list openstack-dev@lists.openstack.org.
 
 A launchpad_ project is available if you need to report bugs.

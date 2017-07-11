@@ -1,18 +1,20 @@
-{% load l10n %}
 {% load i18n %}
+{% load l10n %}
 {% load static %}
 <script src='{% static "cloudkitty/js/d3.min.js" %}' type='text/javascript' charset='utf-8'></script>
 <script src='{% static "cloudkitty/js/d3pie.min.js" %}' type='text/javascript' charset='utf-8'></script>
 <script src='{% static "cloudkitty/js/rickshaw.min.js" %}' type='text/javascript' charset='utf-8'></script>
 
-<h4>{% trans "Cumulative Cost Repartition" %}</h4>
-<div id="repartition_cumulated"></div>
+<div class="col-md-6">
+  <h4>{% trans "Cumulative Cost Repartition" %}</h4>
+  <div id="repartition_cumulated"></div>
+</div>
 
 <script type="text/javascript">
   var cumulated = new d3pie("repartition_cumulated", {
     "size": {
        "canvasHeight": 300,
-       "canvasWidth": 300
+       "canvasWidth": 500
     },
     "labels": {
       "outer": {
@@ -60,14 +62,15 @@
     ]}});
 </script>
 
-<h4>{% trans "Cost per service per hour" %}</h4>
-<div id="cost_progress"></div>
-<div id="cost_progress_legend"></div>
+<div class="col-md-6">
+  <h4>{% trans "Cost Per Service Per Hour" %}</h4>
+  <div id="cost_progress"></div>
+  <div id="cost_progress_legend"></div>
+</div>
 
 <script>
 var palette = new Rickshaw.Color.Palette();
 var graph = new Rickshaw.Graph({
-  unstack: true,
   element: document.querySelector('#cost_progress'),
   width: 500,
   height: 300,
