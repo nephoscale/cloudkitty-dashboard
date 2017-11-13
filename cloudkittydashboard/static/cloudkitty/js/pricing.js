@@ -83,7 +83,7 @@ pricing = {
             // send the JSON by a POST request
             var url_data = [
                 //'/dashboard/project/rating/quote',
-                '/dashboard/project/rating/quote',
+                '/project/rating/quote',
                 '/project/rating/quote']
             this.sendPost(form_data, url_data);
         }
