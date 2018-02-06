@@ -50,11 +50,11 @@ class IndexView(views.APIView):
 
             # services dict
             services = OrderedDict()
-            services = ['compute','image','volume','network.bw.in','network.bw.out','network.floating','cloudstorage','instance.addon','tenant.addon']
+            services = ['compute','image','volume','network.bw.in','network.bw.out','network.floating','cloudstorage','instance.addon','tenant.addon','volume.snapshot']
             services_mapping = OrderedDict()
 
             # Mapping for a services
-            services_mapping = {'compute': 'Compute', 'image': 'Image','volume': 'Block Storage (Volume)', 'network.bw.in': 'Network Transfer (inbound)', 'network.bw.out': 'Network Transfer (outbound)', 'network.floating': 'Floating IP Addresses', 'cloudstorage': 'Object Storage (Swift)', 'instance.addon': 'Compute Instance Add-On', 'tenant.addon': 'Project Add-On' }
+            services_mapping = {'compute': 'Compute', 'image': 'Image','volume': 'Block Storage (Volume)', 'network.bw.in': 'Network Transfer (inbound)', 'network.bw.out': 'Network Transfer (outbound)', 'network.floating': 'Floating IP Addresses', 'cloudstorage': 'Object Storage (Swift)', 'instance.addon': 'Compute Instance Add-On', 'tenant.addon': 'Project Add-On', 'volume.snapshot' : 'Volume Snapshot' }
 
             # get the tenant list of user
             tenants = napi.keystone.tenant_list(
