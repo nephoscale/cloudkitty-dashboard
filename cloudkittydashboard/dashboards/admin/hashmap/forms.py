@@ -135,7 +135,7 @@ class BaseForm(forms.SelfHandlingForm, common.OrderFieldsMixin):
 
     def __init__(self, request, *args, **kwargs):
         super(BaseForm, self).__init__(request, *args, **kwargs)
-        self.order_fields()
+        #self.order_fields()
         groups = api.cloudkittyclient(request).hashmap.groups.list()
         groups = api.identify(groups)
         choices = [(group.id, group.name) for group in groups]
